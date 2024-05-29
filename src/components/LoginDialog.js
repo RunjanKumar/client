@@ -4,6 +4,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { jwtDecode } from "jwt-decode";
 import { AccountContext } from "./AccountProvider";
+import { addUser } from "../Service/api";
 
 const Component = styled(Box)`
   display: flex;
@@ -44,13 +45,11 @@ const dialogStyled = {
   boxShawdow: "none",
   overflow: "hidden",
 };
-const LoginDialog = () => {
+const LoginDialog =  () => {
   const { setAccount } = useContext(AccountContext);
-  console.log("setAccount", setAccount);
-  const onLoginSuccess = (res) => {
-    console.log(res);
+  const onLoginSuccess = async (res) => {
     const data = jwtDecode(res.credential);
-    console.log("data", data);
+    await addUser(data);
     setAccount(data);
   };
   const onLoginError = (err) => {

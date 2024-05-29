@@ -33,14 +33,16 @@ const Component = styled(Box)`
     display: flex;
     align-items: center;
 `;
-const MenuSearch = () => {
+const MenuSearch = ({setText}) => {
     return (
         <Component>
         <Wrapper>
             <Icon>
                 <SearchIcon fontSize="small"/>
             </Icon>
-            <InputField placeholder="Search or start new chat"/>
+            <InputField placeholder="Search or start new chat"
+                onChange={(e) => setText(e.target.value)}
+            />
         </Wrapper>
         </Component>
     )
